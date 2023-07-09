@@ -1,0 +1,23 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-jest": "^29.6.1",
+    "eslint": "^8.44.0",
+    "eslint-prettier": "^0.0.0-empty",
+    "jest": "^29.6.1",
+    "prettier": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.7"
+  }
+}
