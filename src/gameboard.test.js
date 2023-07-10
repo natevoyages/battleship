@@ -15,3 +15,23 @@ test('shipcount prop', () => {
     board.placeShip(3, '[0,5]', false, 'cruiser');
     expect(board.shipCount()).toStrictEqual(1);
 });
+
+
+test('recieveAttack method', () => {
+    let board = gameboard();
+    board.placeShip(3, '[0,5]', false, 'cruiser');
+    board.recieveAttack('[0,5]');
+    board.recieveAttack('[1,5]');
+
+    expect(board.ships.get('cruiser').hits).toStrictEqual(2);
+});
+
+test('recieveAttack method', () => {
+    let board = gameboard();
+    board.placeShip(3, '[0,5]', false, 'cruiser');
+    board.recieveAttack('[0,5]');
+    board.recieveAttack('[1,5]');
+    board.recieveAttack('[2,5]');
+
+    expect(board.ships.size).toStrictEqual(0);
+});
