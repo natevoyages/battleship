@@ -26,12 +26,12 @@ test('recieveAttack method', () => {
     expect(board.ships.get('cruiser').hits).toStrictEqual(2);
 });
 
-test('recieveAttack method', () => {
+test('remove ship when sunk', () => {
     let board = gameboard();
     board.placeShip(3, '[0,5]', false, 'cruiser');
     board.recieveAttack('[0,5]');
     board.recieveAttack('[1,5]');
     board.recieveAttack('[2,5]');
 
-    expect(board.ships.size).toStrictEqual(0);
+    expect(board.ships.size).toBe(0);
 });
