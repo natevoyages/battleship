@@ -17,11 +17,11 @@ test('shipcount prop', () => {
 });
 
 
-test('recieveAttack method', () => {
+test('receiveAttack method', () => {
     let board = gameboard();
     board.placeShip(3, '[0,5]', false, 'cruiser');
-    board.recieveAttack('[0,5]');
-    board.recieveAttack('[1,5]');
+    board.receiveAttack('[0,5]');
+    board.receiveAttack('[1,5]');
 
     expect(board.ships.get('cruiser').hits).toStrictEqual(2);
 });
@@ -29,9 +29,9 @@ test('recieveAttack method', () => {
 test('remove ship when sunk', () => {
     let board = gameboard();
     board.placeShip(3, '[0,5]', false, 'cruiser');
-    board.recieveAttack('[0,5]');
-    board.recieveAttack('[1,5]');
-    board.recieveAttack('[2,5]');
+    board.receiveAttack('[0,5]');
+    board.receiveAttack('[1,5]');
+    board.receiveAttack('[2,5]');
 
     expect(board.ships.size).toBe(0);
 });

@@ -40,7 +40,7 @@ const gameboard = function() {
             //this.placeShip();
         }
     }
-    const recieveAttack = function(aim){
+    const receiveAttack = function(aim){
 
         if(this.coordinates.get(aim).occupied == true && this.coordinates.get(aim).attacked == false){
             this.coordinates.get(aim).attacked = true;
@@ -60,6 +60,6 @@ const gameboard = function() {
         return this.ships.size;
     };
     
-    return {coordinates, placeShip, shipCount, ships, recieveAttack} ;
+    return {coordinates, placeShip, shipCount, ships, receiveAttack} ;
 }
 export {gameboard};
