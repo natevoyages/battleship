@@ -6,7 +6,14 @@ const player = function() {
             enemyBoard.receiveAttack(coordinates);
         }
     };
-    return {board, attack};
+    const computerAI = function(){
+        let randomXY = [];
+        let randNumOne = Math.floor(Math.random()*10); 
+        let randNumtwo = Math.floor(Math.random()*10); 
+        randomXY.push(randNumOne,randNumtwo);
+        return JSON.stringify(randomXY);
+    }
+    return {board, attack, computerAI};
 }
 
 export{player};
