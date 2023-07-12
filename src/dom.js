@@ -52,8 +52,10 @@ const addListeners = function(board, player){
     for(let i = 9; i > -1; i--){
         for(let j = 0; j < 10; j++){
             const xY = document.querySelector(`.x${i}-${j}.enemy`);
-            xY.addEventListener('click',(event) => {attack(event,board)});
-
+            xY.addEventListener('click',function eventHandler(event) {
+                attack(event,board);
+                this.removeEventListener('click', eventHandler);
+            });
         }
     }
 }

@@ -28,9 +28,6 @@ const observer = new MutationObserver(()=> {
     affectUserMap(computerAttack, playerOne.board);
 })
 
-observer.observe(document.querySelector('#map-enemy > .row-9'), { subtree: true, attributes: true });
-
-/*while(playerOne.board.ships.size != 0 || computer.board.ships.size != 0 ){
-    let computerAttack = computer.computerAI();
-    computer.attack(playerOne.board,computerAttack);
-}*/
+for(let i = 0; i < 10; i++){
+    observer.observe(document.querySelector(`#map-enemy > .row-${i}`), { subtree: true, attributes: true });
+}
