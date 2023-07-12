@@ -43,9 +43,11 @@ const attack = function(event, board){
     console.log(board);
     if (board.coordinates.get(aim).occupied == true){
         document.querySelector(`.${newString}`).classList.add("hit");
+        document.getElementById('message').innerText = 'Message: HIT';
     }
     else{
         document.querySelector(`.${newString}`).classList.add("miss");
+        document.getElementById('message').innerText = 'Message: MISS';
     }
 }
 const addListeners = function(board, player){
@@ -59,20 +61,27 @@ const addListeners = function(board, player){
         }
     }
 }
-const affectUserMap = function(arr, board){
+const affectUserMap =  async function(arr, board){
+    function timeout(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    await timeout(1500);
     let xY = arr.split('');
     let x = xY[1];
     console.log(x);
     let y = xY[3];
     const user = document.querySelector(`.x${x}-${y}.player`);
+    document.getElementById('message').innerText = 'Message: Computer thinking...';
+    await timeout(1500);
+
     if (board.coordinates.get(arr).occupied == true){
         user.classList.add("hit");
+        document.getElementById('message').innerText = 'Message: Computer HIT';
     }
     else{
         user.classList.add("miss");
+        document.getElementById('message').innerText = 'Message: Computer MISS';
     }
-}
-const gameMessage= function(){
 }
 
 export{createMap, addListeners, affectUserMap};
