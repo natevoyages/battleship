@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#map-enemy, #map-user{
+    height: 40vh;
+    width: 40vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black ;
+    margin-bottom: 16px;
+
+}  
+
+.hit{
+    background-color: red;
+}
+
+.miss{
+    background-color: gray;
+}

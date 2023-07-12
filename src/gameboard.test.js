@@ -6,7 +6,7 @@ test('createGameBoard method in board', () => {
 });
 test('placeship method', () => {
     let board = gameboard();
-    board.placeShip(3, '[0,5]', true, 'cruiser' );
+    board.placeShip(5, '[0,5]', true, 'cruiser' );
     expect(board.coordinates.get('[0,7]').occupied).toStrictEqual(true);
 });
 

@@ -14,26 +14,26 @@ const gameboard = function() {
         let holder = JSON.parse(location);
         let endPos = JSON.parse(location);
         let ship = createBattleShip(length);
-        endPos[1] = ship.length  + start[1];
-        endPos[0] = ship.length + start[0];
+        endPos[1] = ship.length - 1  + start[1];
+        endPos[0] = ship.length - 1 + start[0];
         if (isVert && endPos[1] < 10){
-            this.ships.set(name, ship);
-            this.coordinates.get(JSON.stringify(holder)).occupied = true;
-            this.coordinates.get(JSON.stringify(holder)).name = name;
+            ships.set(name, ship);
+            coordinates.get(JSON.stringify(holder)).occupied = true;
+            coordinates.get(JSON.stringify(holder)).name = name;
             for(let i = 1; i < length; i++){
                 holder[1]++;
-                this.coordinates.get(JSON.stringify(holder)).occupied = true;
-                this.coordinates.get(JSON.stringify(holder)).name = name;
+                coordinates.get(JSON.stringify(holder)).occupied = true;
+                coordinates.get(JSON.stringify(holder)).name = name;
             }
         }
         else if (!isVert && endPos[0] < 10){
-            this.ships.set(name, ship);
-            this.coordinates.get(JSON.stringify(holder)).occupied = true;
-            this.coordinates.get(JSON.stringify(holder)).name = name;
+            ships.set(name, ship);
+            coordinates.get(JSON.stringify(holder)).occupied = true;
+            coordinates.get(JSON.stringify(holder)).name = name;
             for(let i = 1; i < length; i++){
                 holder[0]++;
-                this.coordinates.get(JSON.stringify(holder)).occupied = true;
-                this.coordinates.get(JSON.stringify(holder)).name = name;
+                coordinates.get(JSON.stringify(holder)).occupied = true;
+                coordinates.get(JSON.stringify(holder)).name = name;
             }
         }
         else{
@@ -42,22 +42,22 @@ const gameboard = function() {
     }
     const receiveAttack = function(aim){
 
-        if(this.coordinates.get(aim).occupied == true && this.coordinates.get(aim).attacked == false){
-            this.coordinates.get(aim).attacked = true;
-            let name = this.coordinates.get(aim).name;
-            this.ships.get(name).hit();
-            if (this.ships.get(name).isSunk()){
-                this.ships.delete(name);
+        if(coordinates.get(aim).occupied == true && coordinates.get(aim).attacked == false){
+            coordinates.get(aim).attacked = true;
+            let name = coordinates.get(aim).name;
+            ships.get(name).hit();
+            if (ships.get(name).isSunk()){
+                ships.delete(name);
             }
         }
-        else if(this.coordinates.get(aim).occupied == false && this.coordinates.get(aim).attacked == false){
-            this.coordinates.get(aim).attacked = true;
+        else if(coordinates.get(aim).occupied == false && coordinates.get(aim).attacked == false){
+            coordinates.get(aim).attacked = true;
         }
     };
     let coordinates = createGameboard();
     let ships = new Map();
     let shipCount = function() {
-        return this.ships.size;
+        return ships.size;
     };
     
     return {coordinates, placeShip, shipCount, ships, receiveAttack} ;
