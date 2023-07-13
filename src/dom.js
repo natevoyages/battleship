@@ -30,7 +30,7 @@ const createCoordinates = function(mapDom, playerType){
     }
 
 }
-const attack = function(event, board){
+const attack = function(event, board, observer){
     let string = event.target.className;
     let newString = string.split(' ');
     newString = newString.join('.');
@@ -44,18 +44,22 @@ const attack = function(event, board){
     if (board.coordinates.get(aim).occupied == true){
         document.querySelector(`.${newString}`).classList.add("hit");
         document.getElementById('message').innerText = 'Message: HIT';
+        observer.disconnect();
     }
     else{
+        for(let i = 0; i < 10; i++){
+            observer.observe(document.querySelector(`#map-enemy > .row-${i}`), { subtree: true, attributes: true });
+        }
         document.querySelector(`.${newString}`).classList.add("miss");
         document.getElementById('message').innerText = 'Message: MISS';
     }
 }
-const addListeners = function(board, player){
+const addListeners = function(board, observer){
     for(let i = 9; i > -1; i--){
         for(let j = 0; j < 10; j++){
             const xY = document.querySelector(`.x${i}-${j}.enemy`);
             xY.addEventListener('click',function eventHandler(event) {
-                attack(event, board);
+                attack(event, board , observer);
                 this.removeEventListener('click', eventHandler);
             });
         }

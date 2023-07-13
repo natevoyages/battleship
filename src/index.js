@@ -17,11 +17,6 @@ computer.board.placeShip(5,'[2,5]', true, 'naur');
 computer.board.placeShip(5,'[3,5]', true, 'hmm');
 computer.board.placeShip(5,'[4,5]', true, 'destoyer');
 
-
-addListeners(computer.board);
-
-console.log(playerOne.board);
-
 const observer = new MutationObserver(()=> {
     let computerAttack = computer.computerAI();
     computer.attack(playerOne.board,computerAttack);
@@ -31,3 +26,6 @@ const observer = new MutationObserver(()=> {
 for(let i = 0; i < 10; i++){
     observer.observe(document.querySelector(`#map-enemy > .row-${i}`), { subtree: true, attributes: true });
 }
+
+addListeners(computer.board, observer);
+
