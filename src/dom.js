@@ -55,7 +55,7 @@ const addListeners = function(board, player){
         for(let j = 0; j < 10; j++){
             const xY = document.querySelector(`.x${i}-${j}.enemy`);
             xY.addEventListener('click',function eventHandler(event) {
-                attack(event,board);
+                attack(event, board);
                 this.removeEventListener('click', eventHandler);
             });
         }
@@ -65,6 +65,7 @@ const affectUserMap =  async function(arr, board){
     function timeout(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+    document.querySelector('.blocker').style.display = 'block';
     await timeout(1500);
     let xY = arr.split('');
     let x = xY[1];
@@ -72,7 +73,7 @@ const affectUserMap =  async function(arr, board){
     let y = xY[3];
     const user = document.querySelector(`.x${x}-${y}.player`);
     document.getElementById('message').innerText = 'Message: Computer thinking...';
-    await timeout(1500);
+    await timeout(1000);
 
     if (board.coordinates.get(arr).occupied == true){
         user.classList.add("hit");
@@ -82,6 +83,7 @@ const affectUserMap =  async function(arr, board){
         user.classList.add("miss");
         document.getElementById('message').innerText = 'Message: Computer MISS';
     }
+    document.querySelector('.blocker').style.display = 'none';
 }
 
 export{createMap, addListeners, affectUserMap};
