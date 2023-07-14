@@ -18,7 +18,7 @@ computer.board.placeShip(5,'[3,5]', true, 'hmm');
 computer.board.placeShip(5,'[4,5]', true, 'destoyer');
 
 const observer = new MutationObserver(()=> {
-    let computerAttack = computer.computerAI();
+    let computerAttack = computer.computerAI;
     computer.attack(playerOne.board,computerAttack);
     affectUserMap(computerAttack, playerOne.board);
 })

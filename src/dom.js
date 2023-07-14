@@ -65,7 +65,8 @@ const addListeners = function(board, observer){
         }
     }
 }
-const affectUserMap =  async function(arr, board){
+const affectUserMap =  async function(aIFn, board){
+    let arr = aIFn();
     function timeout(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -82,6 +83,7 @@ const affectUserMap =  async function(arr, board){
     if (board.coordinates.get(arr).occupied == true){
         user.classList.add("hit");
         document.getElementById('message').innerText = 'Message: Computer HIT';
+        affectUserMap(aIFn, board);
     }
     else{
         user.classList.add("miss");
