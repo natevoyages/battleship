@@ -40,8 +40,18 @@ const attack = function(event, board, observer){
     let aim = `[${x},${y}]`;
     board.receiveAttack(aim);
     console.log(board.coordinates.get(aim).occupied)
-    console.log(board);
-    if (board.coordinates.get(aim).occupied == true){
+    console.log(board.shipCount());
+    if(board.shipCount() == 0){
+        document.getElementById('message').innerText = 'Message: You WIN';
+        if (board.coordinates.get(aim).occupied == true){
+            document.querySelector(`.${newString}`).classList.add("hit");
+            document.getElementById('message').innerText = 'Message: HIT';
+            observer.disconnect();
+            setTimeout(()=> document.getElementById('message').innerText = 'Message: You WIN', 2000);
+            
+        }
+    }
+    else if (board.coordinates.get(aim).occupied == true){
         document.querySelector(`.${newString}`).classList.add("hit");
         document.getElementById('message').innerText = 'Message: HIT';
         observer.disconnect();
@@ -79,8 +89,11 @@ const affectUserMap =  async function(aIFn, board){
     const user = document.querySelector(`.x${x}-${y}.player`);
     document.getElementById('message').innerText = 'Message: Computer thinking...';
     await timeout(1000);
-
-    if (board.coordinates.get(arr).occupied == true){
+    
+    if(board.shipCount() == 0){
+        document.getElementById('message').innerText = 'Message: Computer WINS';
+    }
+    else if (board.coordinates.get(arr).occupied == true){
         user.classList.add("hit");
         document.getElementById('message').innerText = 'Message: Computer HIT';
         affectUserMap(aIFn, board);
