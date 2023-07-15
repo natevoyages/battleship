@@ -5,17 +5,18 @@ const playerOne = player();
 let winner = false;
 createMap('map-enemy', 'enemy');
 createMap('map-user', 'player');
-playerOne.board.placeShip(5,'[0,5]', true, 'destoyer');
-playerOne.board.placeShip(5,'[1,5]', true, 'destoyer');
-playerOne.board.placeShip(5,'[2,5]', true, 'destoyer');
-playerOne.board.placeShip(5,'[3,5]', true, 'destoyer');
+playerOne.board.placeShip(5,'[0,5]', true, 'carrier');
+playerOne.board.placeShip(4,'[1,5]', true, 'battleship');
+playerOne.board.placeShip(3,'[2,5]', true, 'destoyer');
+playerOne.board.placeShip(3,'[3,5]', true, 'subamarine');
+playerOne.board.placeShip(2,'[7,5]', true, 'patrol boat');
 
 
-computer.board.placeShip(5,'[0,5]', true, 'steve');
-computer.board.placeShip(5,'[1,5]', true, 'joe');
-computer.board.placeShip(5,'[2,5]', true, 'naur');
-computer.board.placeShip(5,'[3,5]', true, 'hmm');
-computer.board.placeShip(5,'[4,5]', true, 'destoyer');
+computer.board.placeShip(5,'[0,5]', true, 'carrier');
+computer.board.placeShip(4,'[1,5]', true, 'battleship');
+computer.board.placeShip(3,'[2,5]', true, 'destoyer');
+computer.board.placeShip(3,'[3,5]', true, 'subamarine');
+computer.board.placeShip(2,'[4,5]', true, 'patrol boat');
 
 const observer = new MutationObserver(()=> {
     let computerAttack = computer.computerAI;
