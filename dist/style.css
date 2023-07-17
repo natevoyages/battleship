@@ -18,16 +18,27 @@ p{
     display: flex;
     flex-direction: column;
     border: 1px solid black ;
-    margin-bottom: 16px;
 
 }  
-
+#wrapper-enemy{
+    display: none;
+}
 #message{
     font-size: large;
     padding-bottom: 16px;
 }
 .hit{
     background-color: red;
+}
+.user-occupied{
+    background-color: blue;
+}
+.droppable{
+    border: 1px solid green;
+}
+.dropped{
+    border: 1px solid blue;
+    background-color: blue;
 }
 
 .miss{

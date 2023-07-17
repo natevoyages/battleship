@@ -48,6 +48,7 @@ const gameboard = function() {
             ships.get(name).hit();
             if (ships.get(name).isSunk()){
                 ships.delete(name);
+                console.log('enemyShips',ships.size);
             }
         }
         else if(coordinates.get(aim).occupied == false && coordinates.get(aim).attacked == false){
