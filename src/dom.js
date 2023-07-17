@@ -24,7 +24,7 @@ const createCoordinates = function(mapDom, playerType){
             coordinate.addEventListener('dragover', (event) => {
                 event.preventDefault();
             });
-            coordinate.addEventListener('drop', (event) => {
+            coordinate.addEventListener('drop', (event) => { // old code
                 event.preventDefault();
                 console.log('coordinate',event.dataTransfer.getData('text/html'));
                 event.target.classList.add('user-occupied');
@@ -87,7 +87,7 @@ const addListeners = function(board, userBoard, observer){
         }
     }
 }
-const affectUserMap =  function(aIFn, board, streak = null, direction = null, prev = null){
+const affectUserMap = async function(aIFn, board, streak = null, direction = null, prev = null){
     let arr = null;
     if (prev !== null){
         arr = prev;
@@ -96,10 +96,10 @@ const affectUserMap =  function(aIFn, board, streak = null, direction = null, pr
         arr = aIFn();
     }
     function timeout(ms) {
-        setTimeout(null, ms);
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
     document.querySelector('.blocker').style.display = 'block';
-    timeout(0); // fix
+    await timeout(1000); 
     let xY = arr.split('');
     let x = xY[1];
     let y = xY[3];
@@ -149,7 +149,7 @@ const affectUserMap =  function(aIFn, board, streak = null, direction = null, pr
     let aim = `[${x},${y}]`;
     const user = document.querySelector(`.x${x}-${y}.player`);
     document.getElementById('message').innerText = 'Message: Computer thinking...';
-    timeout(0); //fix
+    await timeout(1000);
     
     if(board.shipCount() == 0){
         document.getElementById('message').innerText = 'Message: Computer WINS';
@@ -190,7 +190,17 @@ const affectUserMap =  function(aIFn, board, streak = null, direction = null, pr
     }
     document.querySelector('.blocker').style.display = 'none';
 }
-const domPlacement = function(length){
+const domPlacedShips = function(board){
+    for(let i = 0; i < 10; i++){
+        for(let j = 0; j < 10; j++){
+            if (board.coordinates.get(`[${i},${j}]`).occupied == true){
+                let user = document.querySelector(`.x${i}-${j}.player`);
+                user.classList.add('user-occupied');
+            }
+        }
+    }
+}
+const domPlacement = function(length, direction){ // redacted to be used in an update
     // map height is 40vh width 40vh
     let page = document.querySelector('body');
     console.log(page);
@@ -210,6 +220,8 @@ const domPlacement = function(length){
     shipBlocks.style.width = `${4 * length}vh`;
     shipBlocks.style.display = 'flex';
     shipBlocks.setAttribute('draggable', 'true');
+    shipBlocks.setAttribute('length', `${length}`);
+    shipBlocks.setAttribute('direction', `${direction}`);
     shipBlocks.addEventListener('dragstart', (e)=> {
         e.dataTransfer.setData('text/html', e.target.innerHTML);
         document.querySelector('#message').textContent ='dragging';
@@ -218,6 +230,4 @@ const domPlacement = function(length){
 shipBlocks.addEventListener('dragend', ()=> {document.querySelector('#message').textContent ='dragging';
 shipBlocks.childNodes.forEach((element) => element.style.backgroundColor = 'blue')});
 }
-// add placement;
-// add logic for adjacent attacks;
-export{createMap, addListeners, affectUserMap, domPlacement};
+export{createMap, addListeners, affectUserMap, domPlacedShips};
